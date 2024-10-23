@@ -5,7 +5,6 @@ import locale
 import math
 
 # 한국어 로케일 설정
-locale.setlocale(locale.LC_TIME, 'ko_KR.UTF-8')
 
 # Streamlit Debug Mode 활성화
 st.set_page_config(page_title='[무인양품] 부드러운 멀티 쿠션 시리즈 (소파쿠션) 리뷰 분석 대시보드 (10월 20일 업데이트)')
