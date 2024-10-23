@@ -134,12 +134,17 @@ if not category_count.empty:
 else:
     st.warning("선택한 간격에 해당하는 데이터가 없습니다.")
 
-# '기타' 카테고리의 10월 20일 데이터 필터링
-etc_category_20_df = df[(df['category'] == '기타') & (df['리뷰 작성시간'].dt.date == pd.to_datetime('2024-10-20').date())]
+# 모든 카테고리의 10월 14일 ~ 10월 20일 데이터 필터링
+for category in category_mapping.values():
+    category_20_df = df[(df['category'] == category) & (df['리뷰 작성시간'] >= pd.to_datetime('2024-10-14')) & (df['리뷰 작성시간'] <= pd.to_datetime('2024-10-20'))]
+    if not category_20_df.empty:
+        st.write(f"{category} 카테고리의 10월 14일 ~ 10월 20일 추가된 리뷰:")
+        st.dataframe(category_20_df[['작성 리뷰 평점', '리뷰 내용']])
+    else:
+        st.info(f"10월 14일 ~ 10월 20일에 추가된 '{category}' 카테고리 데이터가 없습니다.")
 
-# '기타' 카테고리의 10월 20일 데이터 테이블 표시
-if not etc_category_20_df.empty:
-    st.write("기타 카테고리의 10월 20일 추가된 리뷰:")
-    st.dataframe(etc_category_20_df[['작성 리뷰 평점', '리뷰 내용']])
-else:
-    st.info("10월 20일에 추가된 '기타' 카테고리 데이터가 없습니다.")
+# if not etc_category_20_df.empty:
+#     st.write("기타 카테고리의 10월 20일 추가된 리뷰:")
+#     st.dataframe(etc_category_20_df[['작성 리뷰 평점', '리뷰 내용']])
+# else:
+#     st.info("10월 20일에 추가된 '기타' 카테고리 데이터가 없습니다.")
